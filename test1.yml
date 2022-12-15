@@ -1,0 +1,29 @@
+---
+# Pod specification Manifest
+apiVersion: v1
+kind: Pod
+metadata: 
+ name: vineetapppod
+ labels: 
+  app: vineetapp
+spec:
+  containers: 
+   - name: vineetcontainer
+     image: vinau356/app
+     ports:
+      - containerport: 8080
+---
+# Service specification Manifest
+apiVersion: v1
+kind: Service
+metadata:
+  name: vineetappsvc
+spec:
+  type: NodePort
+  selector: 
+   app: vineetapp
+ports: 
+ - port: 80
+   targetPort: 8080
+   nodePort: 30002
+...

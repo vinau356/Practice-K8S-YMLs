@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: blue-deployment
+spec: 
+  replicas: 3
+  strategy: 
+    type: RolloingUpdate
+  selector: 
+    matchLabels:
+      app: k8-deployment
+      version: v1  
+      color: blue 
+  template: 
+    metadata: 
+      labels: 
+        app: k8-deployment
+        version: v1
+        color: blue
+    spec: 
+      containers:
+       - name: k8-boot-deploy
+         image: ashokit/javawebapp
+         imagePullPolicy: Always    
+         ports: 
+         - containerPort: 8080
+...

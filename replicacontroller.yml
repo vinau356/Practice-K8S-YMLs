@@ -1,0 +1,38 @@
+---
+# Pod Replica Manifest
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: vineetwebapprc
+spec:  
+  replicas: 3
+  selector:
+    app: vineetwebapp
+    namesapce: vineetappns
+  template: 
+    metadata:
+     name: vineetapppod
+     labels: 
+       app: vineetwebapp     
+  spec:
+    containers:      
+      - name: vineetwebappcontainer
+        image: vinau356/app
+        ports: 
+          - containerPort: 8080
+---
+# Service Manifest file
+apiVersion: v1
+kind: Service
+metadata:
+    name: vineetappsvc
+    namespace: vineetappns
+spec:
+  type: NodePort
+  selector: 
+      app: vineetwebapp
+  -ports:
+     port: 80
+     targetPort: 80
+     nodePort: 30003 
+...
